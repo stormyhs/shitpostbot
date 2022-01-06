@@ -18,7 +18,7 @@ commands.bot = bot
 funcs.bot = bot
 context.bot = bot
 
-commands.loadGifs()
+commands.gifs = funcs.loadGifs()
 
 
 def organicMessage(channel, msg):  # sends a message in a natural looking way
@@ -51,24 +51,23 @@ def on_message(resp):
     if not ctx.content.startswith(cpf):
         return
 
-    msg = ctx.content.split(" ")
-    msg[0] = msg[0][1:]
+    ctx.content = ctx.content[len(cpf):]
+    command = ctx.content.split(" ")[0]
 
-    if msg[0] == "spam":
-        ctx.deleteMessage()
-        commands.messageSpam(ctx, msg)
+    if command == "spam":
+        commands.messageSpam(ctx)
 
-    elif msg[0] == "slowprint":
-        commands.slowPrint(ctx, ctx.content)
+    elif command == "slowprint":
+        commands.slowPrint(ctx)
 
-    elif msg[0] == "ascii":
-        commands.ascii(ctx, ctx.content)
+    elif command == "ascii":
+        commands.ascii(ctx)
 
-    elif msg[0] == "binary":
-        commands.binary(ctx, msg)
+    elif command == "binary":
+        commands.binary(ctx)
 
-    elif msg[0] == "tochar":
-        commands.tochar(ctx, msg)
+    elif command == "tochar":
+        commands.tochar(ctx)
 
 
 while(True):

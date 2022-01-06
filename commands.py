@@ -1,38 +1,28 @@
 import os
 import json
 import requests
+import funcs
 
 gifs = {}
 bot = None
 
-def loadGifs():
-    global gifs
-    print(">Loading Gifs...")
-    if not (os.path.isfile("giflist.json")):
-        print(">Gif list does not exist. Creating...")
-        with open("giflist.json", "w") as gifFile:
-            gifs = {
-                "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
-            json.dump(gifs, gifFile)
-    else:
-        with open("giflist.json", "r") as gifFile:
-            gifs = json.loads(gifFile.read())
-
-
-def messageSpam(ctx, msg):
+def messageSpam(ctx):
+    content = ctx.content[5:]
+    content = content.split(" ")
     try:
-        amount = int(msg[0])
+        amount = int(content[1])
     except:
         amount = 5
-    if not msg[1] in gifs:
-        return
+    if not content[0] in gifs:
+        content = content[0]
+    else:
+        content = gifs[content[0]]
 
-    content = gifs[msg[1]]
     for i in range(amount):
         ctx.sendMessage(content)
 
-def slowPrint(ctx, msg):
-    originalMessage = msg[10:]
+def slowPrint(ctx):
+    originalMessage = ctx.content[10:]
     print(originalMessage)
     currentMessage = ""
     for i in originalMessage:
@@ -40,28 +30,30 @@ def slowPrint(ctx, msg):
         ctx.editMessage(currentMessage)
 
 
-def ascii(ctx, msg):
-    originalMessage = msg[6:]
+def ascii(ctx):
+    originalMessage = ctx.content[6:]
     originalMessage = originalMessage.replace(" ", "+")
     request = requests.get(
         "https://artii.herokuapp.com/make?text=" + originalMessage.upper())
     ctx.editMessage(f"```{request.text}```")
 
 
-def binary(ctx, msg):
+def binary(ctx):
+    content = ctx.content.split(" ")
+    content.pop(0)
     res = ""
-    msg.pop(0)
-    for word in msg:
+    for word in content:
         for char in word:
             res += str(format(ord(char), '08b'))
             res += " "
         res += "\n"
     ctx.editMessage(res)
 
-def tochar(ctx, msg):
+def tochar(ctx):
+    content = ctx.content.split(" ")
+    content.pop(0)
     res = ""
-    msg.pop(0)
-    for word in msg:
+    for word in content:
         res += chr(int(word, 2))
     ctx.editMessage(res)
 

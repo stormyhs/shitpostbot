@@ -27,6 +27,11 @@ class EditMessageTask:
         self.messageId = messageId
         self.content = content
 
+class AddReactionTask(EditMessageTask):
+    def execute(self):  
+        discreply = bot.addReaction(self.channel, self.messageId, self.content)
+        funcs.preventRatelimit(discreply)
+
 class DeleteMessageTask:
     def execute(self):
         discreply = bot.deleteMessage(self.channel, self.messageId)
@@ -35,6 +40,8 @@ class DeleteMessageTask:
     def __init__(self, channel, messageId):
         self.channel = channel
         self.messageId = messageId
+
+
 
 class Taskhandler:    
 
@@ -71,6 +78,9 @@ class ctx:
 
     def editMessage(self, content, priority = False):
         handler.addTask(EditMessageTask(self.channel_id, self.id, content), priority)
+    
+    def addReaction(self, content, priority = False):
+        handler.addTask(AddReactionTask(self.channel_id, self.id, content), priority)
 
     def deleteMessage(self, priority = False):
         handler.addTask(DeleteMessageTask(self.channel_id, self.id), priority)
