@@ -60,13 +60,13 @@ def on_message(resp):
     command = ctx.content.split(" ")[0]
 
     if command == "spam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.messageSpam(ctx)
     elif command == "addspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.addSpam(ctx)
     elif command == "removespam" or command == "remspam" or command == "rmspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.remSpam(ctx)
 
     elif command == "slowprint":
@@ -82,20 +82,20 @@ def on_message(resp):
         commands.tochar(ctx)
 
     elif command == "addreactspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.addreactspam(ctx)
     elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.removereactspam(ctx)
     elif command == "clearreactspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.clearreactspam()
 
     elif command == "addkeyspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.addkeyspam(ctx)
     elif command == "removekeyspam" or command == "remkeyspam" or command == "rmkeyspam":
-        ctx.deleteMessage()
+        ctx.deleteMessage(priority=True)
         commands.removekeyspam(ctx)
 
 
