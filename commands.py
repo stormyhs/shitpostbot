@@ -1,4 +1,4 @@
-import os, json
+import os, json, requests
 import funcs
 
 gifs = {}
@@ -38,3 +38,9 @@ def slowPrint(ctx, msg):
         currentMessage += i
         discreply = bot.editMessage(ctx['channel_id'], ctx['id'], currentMessage)
         funcs.preventRatelimit(discreply)
+
+def ascii(ctx, msg):
+    originalMessage = msg[6:]
+    originalMessage = originalMessage.replace(" ", "+")
+    request = requests.get("https://artii.herokuapp.com/make?text=" + originalMessage.upper())
+    bot.editMessage(ctx['channel_id'], ctx['id'], f"```{request.text}```")

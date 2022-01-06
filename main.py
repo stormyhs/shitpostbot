@@ -51,6 +51,9 @@ def on_message(resp):
     elif msg[0] == "slowprint":
         commands.slowPrint(ctx, ctx['content'])
 
+    elif msg[0] == "ascii":
+        commands.ascii(ctx, ctx['content'])
+
     
 
 
