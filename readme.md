@@ -27,7 +27,7 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 
 # Changelog
 
-###
+### v0.8
 - Improved json loading for getreactions
 - Increased the delay between actions 
 - `author` is now a subclass of ctx
