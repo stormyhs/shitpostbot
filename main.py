@@ -16,6 +16,18 @@ def organicMessage(channel, msg):  # sends a message in a natural looking way
         time.sleep(round(random.uniform(0, 0.2), 1))
     bot.sendMessage(channel, msg)
 
+def spamGif(ctx, gif, amount):
+    for i in range(amount):
+    # discreply is what discord sends back after we send the messagee
+    discreply = bot.sendMessage(
+    m['channel_id'], "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif")
+    if "retry_after" in discreply.text:
+        jdata = json.loads(discreply.text)
+            print(f">{jdata['retry_after']} TIMEOUT")
+            # wait as long as discord said + 0.5 so we dont get fucked for botting
+            time.sleep(jdata['retry_after'] + 0.5)
+                    time.sleep(0.1)
+
 
 @bot.gateway.command
 def engine(resp):
@@ -24,25 +36,23 @@ def engine(resp):
         print("Logged in as {}#{}".format(
             user['username'], user['discriminator']))
 
-    if resp.event.message:
-        m = resp.parsed.auto()
-        if(m['author']['id'] == cfg.id):
-            if(m['content'].startswith(">nigger")):
-                msg = m['content'].split(" ")
-                try:
-                    amount = int(msg[1])
-                except:
-                    amount = 5
-                for i in range(amount):
-                    # discreply is what discord sends back after we send the messagee
-                    discreply = bot.sendMessage(
-                        m['channel_id'], "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif")
-                    if "retry_after" in discreply.text:
-                        jdata = json.loads(discreply.text)
-                        print(f">{jdata['retry_after']} TIMEOUT")
-                        # wait as long as discord said + 0.5 so we dont get fucked for botting
-                        time.sleep(jdata['retry_after'] + 0.5)
-                    time.sleep(0.1)
+@bot.gateway.command
+def on_message(resp):
+
+    if not resp.event.message:
+        return 
+
+    m = resp.parsed.auto()
+    if(m['author']['id'] != cfg.id):
+        return
+
+    if(m['content'].startswith(">nigger")):
+        msg = m['content'].split(" ")
+        try:
+            amount = int(msg[1])
+        except:
+            amount = 5
+               
 
 
 while(True):
