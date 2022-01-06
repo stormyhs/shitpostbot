@@ -29,7 +29,17 @@ def engine(resp):
     if resp.event.message:
         m = resp.parsed.auto()
         if(m['author']['id'] == cfg.id):
-            print(m['content'])
+            if(m['content'].startswith(">nigger")):
+                msg = m['content'].split(" ")
+                try:
+                    amount = int(msg[1])
+                except:
+                    amount = 5
+                for i in range(amount):
+                    bot.sendMessage(
+                        m['channel_id'], "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif")
+                    time.sleep(0.1)
+                    # TODO: add ratelimit check
 
 
 while(True):

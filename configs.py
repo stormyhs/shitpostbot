@@ -1,3 +1,3 @@
 class config:
     token = ''
-    id = 0  # has to be an int
+    id = "744323186530713600"
