@@ -142,3 +142,35 @@ def removekeyspam(ctx):
     if(keyWord in data):
         del data[keyWord]
     funcs.writeJson("reactspam.json", data)
+
+
+def addSpam(ctx):
+    global gifs
+    content = ctx.content.split(" ")
+    content.pop(0)
+    keyWord = content[0]
+    gif = content[1]
+    newKey = {keyWord: gif}
+    if not(os.path.exists("giflist.json")):
+        funcs.writeJson("giflist.json", newKey)
+    else:
+        gifFileContentJson = funcs.loadJson("giflist.json")
+        print(gifFileContentJson)
+        gifFileContentJson[keyWord] = gif
+        funcs.writeJson("giflist.json", gifFileContentJson)
+
+    gifs = funcs.loadJson("giflist.json")
+
+
+def remSpam(ctx):
+    global gifs
+    content = ctx.content.split(" ")
+    content.pop(0)
+    keyWord = content[0]
+    gifFileContentJson = funcs.loadJson("giflist.json")
+
+    if(keyWord in gifFileContentJson):
+        del gifFileContentJson[keyWord]
+    funcs.writeJson("giflist.json", gifFileContentJson)
+
+    gifs = funcs.loadJson("giflist.json")

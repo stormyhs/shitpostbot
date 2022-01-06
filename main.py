@@ -62,6 +62,12 @@ def on_message(resp):
     if command == "spam":
         ctx.deleteMessage()
         commands.messageSpam(ctx)
+    elif command == "addspam":
+        ctx.deleteMessage()
+        commands.addSpam(ctx)
+    elif command == "removespam" or command == "remspam" or command == "rmspam":
+        ctx.deleteMessage()
+        commands.remSpam(ctx)
 
     elif command == "slowprint":
         commands.slowPrint(ctx)
