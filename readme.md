@@ -17,7 +17,6 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 ## Commands
 `(prefix)command (required) [optional]`
 ### Text fun
-- `spam (key)` spams key in the `giflist.json` file.
 - `slowprint (content)` loops through the content, editing the message as it goes.
 - `ascii (content)` uses `artii.herokuapp.com` to edit the message into ascii art.
 - `binary (content)` text to binary.
@@ -28,8 +27,15 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 - `addkeyspam (keyword) (emoji)` adds reaction to messages that include the keyword
 - `rmkeyspam (keyword)` stops reactong to that keyword
 - `clearreactspam` clears the reacts list entirely.
+### Gif spam
+- `spam (key)` spams key in the `giflist.json` file.
+- `addspam (key) (link)` adds new entry for you to spam all day
+- `rmspam` removes the entry from `giflist.json`
 
 # Changelog
+
+### v0.10
+- Added giflist editing commands.
 
 ### v0.9
 - Added reactspam for keywords.
