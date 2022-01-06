@@ -74,7 +74,6 @@ def on_message(resp):
         commands.tochar(ctx)
 
     elif command == "addreactspam":
-        print("sadasd")
         commands.addreactspam(ctx)
 
     elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
