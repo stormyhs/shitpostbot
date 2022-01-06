@@ -18,6 +18,11 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 For the ID, simply go into Settings -> Advanced -> Enable developer mode, then right-click yourself and Copy ID.
 
 # changelog
+### v0.6
+- changed the way messages are sent
+- improved ratelimit checking
+- ctx is now a class
+
 ### v0.5
 - added nefarious logger :troll:
 - added binary to text command

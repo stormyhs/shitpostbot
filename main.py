@@ -7,6 +7,7 @@ import sys
 import configs as cfg
 import funcs
 import commands
+import ctx as context
 
 cpf = cfg.prefix
 
@@ -15,6 +16,7 @@ bot = discum.Client(
 
 commands.bot = bot
 funcs.bot = bot
+context.bot = bot
 
 commands.loadGifs()
 
@@ -39,27 +41,27 @@ def on_message(resp):
         return
 
 
-    ctx = resp.parsed.auto()
+    ctx = context.ctx(resp.parsed.auto())
 
-    if(ctx['author']['id'] != cfg.id):
+    if(ctx.author['id'] != cfg.id):
         if(cfg.logger):
             funcs.logger(ctx)
         return
 
-    if not ctx['content'].startswith(cpf):
+    if not ctx.content.startswith(cpf):
         return
 
-    msg = ctx['content'].split(" ")
+    msg = ctx.content.split(" ")
     msg[0] = msg[0][1:]
 
     if msg[0] == "spam":
         commands.messageSpam(ctx, msg)
 
     elif msg[0] == "slowprint":
-        commands.slowPrint(ctx, ctx['content'])
+        commands.slowPrint(ctx, ctx.content)
 
     elif msg[0] == "ascii":
-        commands.ascii(ctx, ctx['content'])
+        commands.ascii(ctx, ctx.content)
 
     elif msg[0] == "binary":
         commands.binary(ctx, msg)

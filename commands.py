@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-import funcs
 
 gifs = {}
 bot = None
@@ -30,12 +29,7 @@ def messageSpam(ctx, msg):
 
     content = gifs[msg[1]]
     for i in range(amount):
-        # discreply is what discord sends back after we send the messagee
-        discreply = bot.sendMessage(
-            ctx['channel_id'], content)
-
-        funcs.preventRatelimit(discreply)
-
+        ctx.sendMessage(content)
 
 def slowPrint(ctx, msg):
     originalMessage = msg[10:]
@@ -43,9 +37,7 @@ def slowPrint(ctx, msg):
     currentMessage = ""
     for i in originalMessage:
         currentMessage += i
-        discreply = bot.editMessage(
-            ctx['channel_id'], ctx['id'], currentMessage)
-        funcs.preventRatelimit(discreply)
+        ctx.editMessage(currentMessage)
 
 
 def ascii(ctx, msg):
@@ -53,7 +45,7 @@ def ascii(ctx, msg):
     originalMessage = originalMessage.replace(" ", "+")
     request = requests.get(
         "https://artii.herokuapp.com/make?text=" + originalMessage.upper())
-    bot.editMessage(ctx['channel_id'], ctx['id'], f"```{request.text}```")
+    ctx.editMessage(f"```{request.text}```")
 
 
 def binary(ctx, msg):
@@ -64,13 +56,13 @@ def binary(ctx, msg):
             res += str(format(ord(char), '08b'))
             res += " "
         res += "\n"
-    bot.editMessage(ctx['channel_id'], ctx['id'], res)
+    ctx.editMessage(res)
 
 def tochar(ctx, msg):
     res = ""
     msg.pop(0)
     for word in msg:
         res += chr(int(word, 2))
-    bot.editMessage(ctx['channel_id'], ctx['id'], res)
+    ctx.editMessage(res)
 
 

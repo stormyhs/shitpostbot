@@ -3,7 +3,7 @@ import sys
 token = "Token"
 id = "UserId"
 prefix = ">"
-logger = True
+logger = False
 logFormat = "log" # be sure not to put a dot in here
 
 if(token == ""):
