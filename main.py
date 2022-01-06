@@ -32,6 +32,7 @@ def organicMessage(channel, msg):  # sends a message in a natural looking way
 
 @bot.gateway.command
 def engine(resp):
+    global userID
     if resp.event.ready_supplemental:  # ready_supplemental is sent after ready
         user = bot.gateway.session.user
         print("Logged in as {}#{}".format(
