@@ -2,6 +2,7 @@ import os, json
 import funcs
 
 gifs = {}
+bot = None
 
 print(">Loading Gifs...")
 if not (os.path.isfile("giflist.json")):
@@ -22,6 +23,18 @@ def messageSpam(ctx, msg):
         return
 
     content = gifs[msg[1]]
+    for i in range(amount):
+        # discreply is what discord sends back after we send the messagee
+        discreply = bot.sendMessage(
+            ctx['channel_id'], content)
 
-    funcs.spamGif(ctx, content, amount)
+        funcs.preventRatelimit(discreply)
 
+def slowPrint(ctx, msg):
+    originalMessage = msg[10:]
+    print(originalMessage)
+    currentMessage = ""
+    for i in originalMessage:
+        currentMessage += i
+        discreply = bot.editMessage(ctx['channel_id'], ctx['id'], currentMessage)
+        funcs.preventRatelimit(discreply)

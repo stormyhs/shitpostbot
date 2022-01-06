@@ -13,7 +13,7 @@ cpf = cfg.prefix
 bot = discum.Client(
     token=cfg.token, log=False)
 
-funcs.bot = bot
+commands.bot = bot
 
 
 def organicMessage(channel, msg):  # sends a message in a natural looking way
@@ -47,6 +47,9 @@ def on_message(resp):
     
     if msg[0] == "spam":
         commands.messageSpam(ctx, msg)
+
+    elif msg[0] == "slowprint":
+        commands.slowPrint(ctx, ctx['content'])
 
     
 

@@ -1,19 +1,13 @@
 import os, json, time
-bot = None
 
-def spamGif(ctx, content, amount):
-    for i in range(amount):
-        # discreply is what discord sends back after we send the messagee
-        discreply = bot.sendMessage(
-            ctx['channel_id'], content)
-
-        if "retry_after" in discreply.text:
-            jdata = json.loads(discreply.text)
-            print(f">{jdata['retry_after']} TIMEOUT")
-            # wait as long as discord said + 0.5 so we dont get fucked for botting
-            time.sleep(jdata['retry_after'] + 0.5)
-        else:
-            time.sleep(0.20)
+def preventRatelimit(discreply):
+    if "retry_after" in discreply.text:
+        jdata = json.loads(discreply.text)
+        print(f">{jdata['retry_after']} TIMEOUT")
+        # wait as long as discord said + 0.5 so we dont get fucked for botting
+        time.sleep(jdata['retry_after'] + 0.5)
+    else:
+        time.sleep(0.20)
 
 def loadEmotes():
     global emoteDictionary
