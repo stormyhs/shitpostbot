@@ -1,23 +1,10 @@
 import os
 import json
 import requests
+import funcs
 
 gifs = {}
 bot = None
-
-def loadGifs():
-    global gifs
-    print(">Loading Gifs...")
-    if not (os.path.isfile("giflist.json")):
-        print(">Gif list does not exist. Creating...")
-        with open("giflist.json", "w") as gifFile:
-            gifs = {
-                "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
-            json.dump(gifs, gifFile)
-    else:
-        with open("giflist.json", "r") as gifFile:
-            gifs = json.loads(gifFile.read())
-
 
 def messageSpam(ctx):
     content = ctx.content[5:]

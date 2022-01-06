@@ -18,7 +18,7 @@ commands.bot = bot
 funcs.bot = bot
 context.bot = bot
 
-commands.loadGifs()
+commands.gifs = funcs.loadGifs()
 
 def organicMessage(channel, msg):  # sends a message in a natural looking way
     bot.typingAction(channel)
