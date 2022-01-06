@@ -50,24 +50,24 @@ def on_message(resp):
 
     if not ctx.content.startswith(cpf):
         return
+    
+    ctx.content = ctx.content[len(cpf):]
+    command = ctx.content.split(" ")[0]
 
-    msg = ctx.content.split(" ")
-    msg[0] = msg[0][1:]
+    if command == "spam":
+        commands.messageSpam(ctx)
 
-    if msg[0] == "spam":
-        commands.messageSpam(ctx, msg)
+    elif command == "slowprint":
+        commands.slowPrint(ctx)
 
-    elif msg[0] == "slowprint":
-        commands.slowPrint(ctx, ctx.content)
+    elif command == "ascii":
+        commands.ascii(ctx)
 
-    elif msg[0] == "ascii":
-        commands.ascii(ctx, ctx.content)
+    elif command == "binary":
+        commands.binary(ctx)
 
-    elif msg[0] == "binary":
-        commands.binary(ctx, msg)
-
-    elif msg[0] == "tochar":
-        commands.tochar(ctx, msg)
+    elif command == "tochar":
+        commands.tochar(ctx)
 
 while(True):
     print(">Connecting...")
