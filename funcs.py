@@ -96,8 +96,8 @@ def handleReactSpam(ctx):
     if(ctx.author.id in commands.data):
         ctx.addReaction(commands.data[ctx.author.id])
 
-def loadJson(filename):
-    playlist_file = open(filename)
+def loadJson(filename, enctype = 'utf-8'):
+    playlist_file = open(filename, encoding=enctype)
     playlists = json.load(playlist_file)
     playlist_file.close()
     return playlists
@@ -106,4 +106,3 @@ def writeJson(file, data, enctype = 'utf-8'):
     playlist_file = open(file, 'w', encoding=enctype)
     json.dump(data, playlist_file, indent=4, ensure_ascii=False)
     playlist_file.close()
-

@@ -5,7 +5,7 @@ import funcs
 
 gifs = {}
 bot = None
-data = []
+data = {}
 
 
 def loadReactions():
@@ -13,12 +13,9 @@ def loadReactions():
     print(">Loading Reacts...")
     if not (os.path.isfile("reactspam.json")):
         print(">Reacts list does not exist. Creating...")
-        with open("reactspam.json", "w") as f:
-            f.write("{}")
+        funcs.writeJson("reactspam.json", data)
     else:
-        with open("reactspam.json", "r", encoding="utf-8") as f:
-            data = json.loads(f.read())
-
+        data = funcs.loadJson("reactspam.json")
 
 def messageSpam(ctx):
     content = ctx.content[5:]
