@@ -13,7 +13,7 @@ def preventRatelimit(discreply):
         jdata = json.loads(discreply.text)
         print(f">{jdata['retry_after']} TIMEOUT")
         # wait as long as discord said + 0.5 so we dont get fucked for botting
-        time.sleep(jdata['retry_after'] + 0.5)
+        time.sleep(jdata['retry_after'])
 
 def loadEmotes():
     global emoteDictionary
@@ -94,7 +94,8 @@ def logger(ctx):
 
 def handleReactSpam(ctx):
     if(ctx.author.id in commands.data):
-        ctx.addReaction(commands.data[ctx.author.id])
+        for emoji in commands.data[ctx.author.id]:
+            ctx.addReaction(emoji)
 
 def loadJson(filename, enctype = 'utf-8'):
     playlist_file = open(filename, encoding=enctype)

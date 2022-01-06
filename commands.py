@@ -90,7 +90,10 @@ def addreactspam(ctx):
         funcs.writeJson("reactspam.json", newKey)
     else:
         data = funcs.loadJson("reactspam.json")
-        data[id] = theEmoji
+        if not (id in data):
+            data[id] = [theEmoji]
+        else:
+            data[id].append(theEmoji)
         funcs.writeJson("reactspam.json", data)
 
 
