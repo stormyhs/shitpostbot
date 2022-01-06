@@ -18,22 +18,22 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 For the ID, simply go into Settings -> Advanced -> Enable developer mode, then right-click yourself and Copy ID.
 
 # changelog
-v0.5
+### v0.5
 - added nefarious logger :troll:
 - added binary to text command
 
-v0.4
+### v0.4
 - added ascii command
 - added slowprint command
 - added text to binary command
 
-v0.3
+### v0.3
 - Parses the command properly
 - (re)Added delay between messages
 - Checks for giflist file
 
-v0.2
+### v0.2
 - very basic prototype
 
-v0.1
+### v0.1
 - initial
