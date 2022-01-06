@@ -18,6 +18,12 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 For the ID, simply go into Settings -> Advanced -> Enable developer mode, then right-click yourself and Copy ID.
 
 # changelog
+### v0.7
+- added reactspam feature
+- `ctx` is a class and shit
+- learned how to solve merge conflicts (i think)
+- other stuff idk look at the commits
+
 ### v0.6
 - changed the way messages are sent
 - improved ratelimit checking
