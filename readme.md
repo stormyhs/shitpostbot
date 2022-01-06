@@ -8,6 +8,11 @@ A discord self-bot to automate shitposting for your everyday needs. Caution: May
 
 ## changelog
 
+v0.3
+- Parses the command properly
+- (re)Added delay between messages
+- Checks for giflist file
+
 v0.2
 - very basic prototype
 
