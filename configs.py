@@ -1,13 +1,14 @@
 import sys
 
-token = "TOKEN"
-id = "USERID"
-prefix = ";"
+token = 'TOKEN'
+id = "ID"
+prefix = ">"
+logger = False
 
 if(token == ""):
-    print("please enter a discord Token ")
+    print("Please enter a discord token")
     sys.exit(0)
 
 if(id == ""):
-    print("Please enter a local id")
+    print("Please enter a user ID corresponding to the token")
     sys.exit(0)

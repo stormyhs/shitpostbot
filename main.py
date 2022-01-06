@@ -38,6 +38,8 @@ def on_message(resp):
 
     ctx = resp.parsed.auto()
     if(ctx['author']['id'] != cfg.id):
+        if(cfg.logger):
+            funcs.logger(ctx)
         return
 
     if not ctx['content'].startswith(cpf):
