@@ -1,10 +1,12 @@
 import os
 import json
 import time
+import commands
 
 import configs as cfg
 
 bot = None
+
 
 def preventRatelimit(discreply):
     if "retry_after" in discreply.text:
@@ -66,9 +68,11 @@ def logger(ctx):
 
     else:
         guildName = bot.gateway.session.guild(ctx['guild_id']).name
-        channelName = bot.gateway.session.guild(ctx['guild_id']).channelData(ctx['channel_id'])['name']
+        channelName = bot.gateway.session.guild(
+            ctx['guild_id']).channelData(ctx['channel_id'])['name']
         guildPath = f"logger\\{guildName}_{ctx['guild_id']}"
-        channelPath = guildPath + f"\\{channelName}-{ctx['channel_id']}.{cfg.logFormat}"
+        channelPath = guildPath + \
+            f"\\{channelName}-{ctx['channel_id']}.{cfg.logFormat}"
 
     if not(os.path.exists("logger")):
         os.makedirs("logger")
@@ -85,9 +89,14 @@ def logger(ctx):
         timestamp = timestamp.split(".")
         timestamp = timestamp[0]
 
-        if('message_reference' in ctx.keys()): # checking if the message was a reply 
+        if('message_reference' in ctx.keys()):  # checking if the message was a reply
             f.write(f"REPLY TO: {ctx['message_reference']['message_id']}\n")
         f.write(
             f"{ctx['author']['username']}#{ctx['author']['discriminator']} AT {timestamp} --- Message ID {ctx['id']}\n{ctx['content']}\n\n")
-        
-        
+
+
+def handleReactSpam(ctx):
+    print(commands.data)
+    if(ctx.author['id'] in commands.data):
+        bot.addReaction(ctx.channel_id, ctx.id,
+                        commands.data[ctx.author['id']])
