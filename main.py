@@ -22,6 +22,7 @@ def organicMessage(channel, msg):  # sends a message in a natural looking way
         time.sleep(round(random.uniform(0, 0.2), 1))
     bot.sendMessage(channel, msg)
 
+
 @bot.gateway.command
 def engine(resp):
     if resp.event.ready_supplemental:  # ready_supplemental is sent after ready
@@ -44,7 +45,7 @@ def on_message(resp):
 
     msg = ctx['content'].split(" ")
     msg[0] = msg[0][1:]
-    
+
     if msg[0] == "spam":
         commands.messageSpam(ctx, msg)
 
@@ -54,7 +55,8 @@ def on_message(resp):
     elif msg[0] == "ascii":
         commands.ascii(ctx, ctx['content'])
 
-    
+    elif msg[0] == "binary":
+        commands.binary(ctx, msg)
 
 
 while(True):
