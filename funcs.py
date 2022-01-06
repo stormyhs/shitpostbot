@@ -93,9 +93,6 @@ def logger(ctx):
 
 
 def handleReactSpam(ctx):
-    print(ctx.author.id )
-    print(commands.data)
-    print(commands.data)
     if(ctx.author.id in commands.data):
         ctx.addReaction(commands.data[ctx.author.id])
 

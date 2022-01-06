@@ -46,9 +46,7 @@ def on_message(resp):
 
     ctx = context.ctx(resp.parsed.auto())
 
-    print(bot.gateway.session.user['id'])
-
-    if(ctx.author['id'] != userID):
+    if(ctx.author.id != userID):
         if(cfg.logger):
             funcs.logger(ctx)
         funcs.handleReactSpam(ctx)
