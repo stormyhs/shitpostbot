@@ -20,6 +20,7 @@ context.bot = bot
 
 commands.loadGifs()
 
+
 def organicMessage(channel, msg):  # sends a message in a natural looking way
     bot.typingAction(channel)
     for word in msg:
@@ -40,7 +41,6 @@ def on_message(resp):
     if not resp.event.message:
         return
 
-
     ctx = context.ctx(resp.parsed.auto())
 
     if(ctx.author['id'] != cfg.id):
@@ -55,6 +55,7 @@ def on_message(resp):
     msg[0] = msg[0][1:]
 
     if msg[0] == "spam":
+        ctx.deleteMessage()
         commands.messageSpam(ctx, msg)
 
     elif msg[0] == "slowprint":
@@ -68,6 +69,7 @@ def on_message(resp):
 
     elif msg[0] == "tochar":
         commands.tochar(ctx, msg)
+
 
 while(True):
     print(">Connecting...")
