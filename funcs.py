@@ -15,11 +15,13 @@ def preventRatelimit(discreply):
         # wait as long as discord said + 0.5 so we dont get fucked for botting
         time.sleep(jdata['retry_after'])
 
+
 def loadEmotes():
     global emoteDictionary
     f = open('emojis.json', 'r')
     emoteDictionary = json.load(f)
     f.close()
+
 
 def loadGifs():
     print(">Loading Gifs...")
@@ -33,6 +35,7 @@ def loadGifs():
         with open("giflist.json", "r") as gifFile:
             gifs = json.loads(gifFile.read())
     return gifs
+
 
 def getEmojis(bot, ctx):
     emojiList = {}
@@ -97,13 +100,21 @@ def handleReactSpam(ctx):
         for emoji in commands.data[ctx.author.id]:
             ctx.addReaction(emoji)
 
-def loadJson(filename, enctype = 'utf-8'):
+    for word in ctx.content.split(" "):
+        if(word in commands.data):
+            for emoji in commands.data[word]:
+                ctx.addReaction(emoji)
+            break
+
+
+def loadJson(filename, enctype='utf-8'):
     playlist_file = open(filename, encoding=enctype)
     playlists = json.load(playlist_file)
     playlist_file.close()
     return playlists
 
-def writeJson(file, data, enctype = 'utf-8'):
+
+def writeJson(file, data, enctype='utf-8'):
     playlist_file = open(file, 'w', encoding=enctype)
     json.dump(data, playlist_file, indent=4, ensure_ascii=False)
     playlist_file.close()

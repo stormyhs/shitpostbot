@@ -113,3 +113,32 @@ def clearreactspam():
     global data
     data = {}
     funcs.writeJson("reactspam.json", data)
+
+
+def addkeyspam(ctx):
+    global data
+    content = ctx.content.split(" ")
+    content.pop(0)  # remove command word
+    keyWord = content[0]
+    theEmoji = content[1]
+
+    newKey = {keyWord: theEmoji}
+    if not(os.path.exists("reactspam.json")):
+        funcs.writeJson("reactspam.json", newKey)
+    else:
+        data = funcs.loadJson("reactspam.json")
+        if not (keyWord in data):
+            data[keyWord] = [theEmoji]
+        else:
+            data[keyWord].append(theEmoji)
+        funcs.writeJson("reactspam.json", data)
+
+
+def removekeyspam(ctx):
+    msg = ctx.content.split(" ")
+    global data
+    keyWord = msg[1]
+    data = funcs.loadJson("reactspam.json")
+    if(keyWord in data):
+        del data[keyWord]
+    funcs.writeJson("reactspam.json", data)
