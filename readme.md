@@ -26,6 +26,11 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 - `clearreactspam` clears the reacts list entirely.
 
 # Changelog
+
+###
+- Improved json loading for getreactions
+- Increased the delay between actions 
+- `author` is now a subclass of ctx
 ### v0.7
 - added reactspam feature
 - `ctx` is a class and shit
