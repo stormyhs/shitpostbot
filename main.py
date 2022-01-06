@@ -18,7 +18,7 @@ commands.bot = bot
 funcs.bot = bot
 context.bot = bot
 
-commands.loadGifs()
+commands.gif = funcs.loadGifs()
 commands.loadReactions()
 
 
@@ -53,31 +53,30 @@ def on_message(resp):
     if not ctx.content.startswith(cpf):
         return
 
-    msg = ctx.content.split(" ")
-    msg[0] = msg[0][1:]
+    ctx.content = ctx.content[len(cpf):]
+    command = ctx.content.split(" ")[0]
 
-    if msg[0] == "spam":
-        ctx.deleteMessage()
-        commands.messageSpam(ctx, msg)
+    if command == "spam":
+        commands.messageSpam(ctx)
 
-    elif msg[0] == "slowprint":
-        commands.slowPrint(ctx, ctx.content)
+    elif command == "slowprint":
+        commands.slowPrint(ctx)
 
-    elif msg[0] == "ascii":
-        commands.ascii(ctx, ctx.content)
+    elif command == "ascii":
+        commands.ascii(ctx)
 
-    elif msg[0] == "binary":
-        commands.binary(ctx, msg)
+    elif command == "binary":
+        commands.binary(ctx)
 
-    elif msg[0] == "tochar":
-        commands.tochar(ctx, msg)
+    elif command == "tochar":
+        commands.tochar(ctx)
 
-    elif msg[0] == "addreactspam":
-        commands.addreactspam(ctx, msg)
-    elif msg[0] == "removereactspam" or msg[0] == "remreactspam" or msg[0] == "rmreactspam":
-        commands.removereactspam(ctx, msg)
-    elif msg[0] == "clearreactspam":
-        commands.clearreactspam(ctx, msg)
+    elif command == "addreactspam":
+        commands.addreactspam(ctx)
+    elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
+        commands.removereactspam(ctx)
+    elif command == "clearreactspam":
+        commands.clearreactspam(ctx)
 
 
 while(True):
