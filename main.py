@@ -59,6 +59,7 @@ def on_message(resp):
     command = ctx.content.split(" ")[0]
 
     if command == "spam":
+        ctx.deleteMessage()
         commands.messageSpam(ctx)
 
     elif command == "slowprint":
@@ -74,12 +75,15 @@ def on_message(resp):
         commands.tochar(ctx)
 
     elif command == "addreactspam":
+        ctx.deleteMessage()
         commands.addreactspam(ctx)
 
     elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
+        ctx.deleteMessage()
         commands.removereactspam(ctx)
 
     elif command == "clearreactspam":
+        ctx.deleteMessage()
         commands.clearreactspam()
 
 
