@@ -19,7 +19,7 @@ commands.bot = bot
 funcs.bot = bot
 context.bot = bot
 
-commands.gif = funcs.loadGifs()
+commands.gifs = funcs.loadGifs()
 commands.loadReactions()
 
 

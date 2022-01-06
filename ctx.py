@@ -8,7 +8,6 @@ working = False
 
 class SendMessageTask:
     def execute(self):
-        print("sending message in guild " + self.guild + " in channel " + self.channel + " with content " + self.content)
         discreply = bot.sendMessage(self.channel, self.content)
         funcs.preventRatelimit(discreply)
 
@@ -82,7 +81,6 @@ class ctx:
             setattr(self, key, ctxDict[key])
 
     def sendMessage(self, content, priority = False):
-        print("added task")
         handler.addTask(SendMessageTask(self.guild_id, self.channel_id, content), priority)
 
     def editMessage(self, content, priority = False):
