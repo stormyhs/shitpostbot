@@ -1,4 +1,6 @@
-import os, json, requests
+import os
+import json
+import requests
 import funcs
 
 gifs = {}
@@ -8,11 +10,13 @@ print(">Loading Gifs...")
 if not (os.path.isfile("giflist.json")):
     print(">Gif list does not exist. Creating...")
     with open("giflist.json", "w") as gifFile:
-        gifDictionary =  {"nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
+        gifDictionary = {
+            "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
         json.dump(gifDictionary, gifFile)
-else:       
+else:
     with open("giflist.json", "r") as gifFile:
         gifs = json.loads(gifFile.read())
+
 
 def messageSpam(ctx, msg):
     try:
@@ -30,17 +34,30 @@ def messageSpam(ctx, msg):
 
         funcs.preventRatelimit(discreply)
 
+
 def slowPrint(ctx, msg):
     originalMessage = msg[10:]
     print(originalMessage)
     currentMessage = ""
     for i in originalMessage:
         currentMessage += i
-        discreply = bot.editMessage(ctx['channel_id'], ctx['id'], currentMessage)
+        discreply = bot.editMessage(
+            ctx['channel_id'], ctx['id'], currentMessage)
         funcs.preventRatelimit(discreply)
+
 
 def ascii(ctx, msg):
     originalMessage = msg[6:]
     originalMessage = originalMessage.replace(" ", "+")
-    request = requests.get("https://artii.herokuapp.com/make?text=" + originalMessage.upper())
+    request = requests.get(
+        "https://artii.herokuapp.com/make?text=" + originalMessage.upper())
     bot.editMessage(ctx['channel_id'], ctx['id'], f"```{request.text}```")
+
+
+def binary(ctx, msg):
+    res = ""
+    msg.pop(0)
+    for word in msg:
+        res += ''.join(format(ord(i), '08b') for i in word)  # what the fuck
+        res += " "
+    bot.editMessage(ctx['channel_id'], ctx['id'], res)
