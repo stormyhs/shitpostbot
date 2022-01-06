@@ -4,9 +4,7 @@ import time
 import random
 import sys
 import json
-import configs
-
-cfg = configs.config  # fuck you i dont care
+import configs as cfg
 
 bot = discum.Client(
     token=cfg.token, log=False)
