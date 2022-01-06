@@ -17,6 +17,7 @@ def loadReactions():
     else:
         data = funcs.loadJson("reactspam.json")
 
+
 def messageSpam(ctx):
     content = ctx.content[5:]
     content = content.split(" ")
@@ -74,7 +75,7 @@ def tochar(ctx):
 def addreactspam(ctx):
     global data
     content = ctx.content.split(" ")
-    content.pop(0) # remove command word
+    content.pop(0)  # remove command word
     id = ""
     theEmoji = ""
     for word in list(content):
@@ -97,7 +98,8 @@ def addreactspam(ctx):
         funcs.writeJson("reactspam.json", data)
 
 
-def removereactspam(ctx, msg):
+def removereactspam(ctx):
+    msg = ctx.content.split(" ")
     global data
     id = msg[1]
     id = id[3:len(id)-1]
