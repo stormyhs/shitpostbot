@@ -58,6 +58,9 @@ def on_message(resp):
     elif msg[0] == "binary":
         commands.binary(ctx, msg)
 
+    elif msg[0] == "tochar":
+        commands.tochar(ctx, msg)
+
 
 while(True):
     print(">Connecting...")

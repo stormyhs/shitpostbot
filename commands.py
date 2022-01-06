@@ -58,6 +58,17 @@ def binary(ctx, msg):
     res = ""
     msg.pop(0)
     for word in msg:
-        res += ''.join(format(ord(i), '08b') for i in word)  # what the fuck
-        res += " "
+        for char in word:
+            res += str(format(ord(char), '08b'))
+            res += " "
+        res += "\n"
     bot.editMessage(ctx['channel_id'], ctx['id'], res)
+
+def tochar(ctx, msg):
+    res = ""
+    msg.pop(0)
+    for word in msg:
+        res += chr(int(word, 2))
+    bot.editMessage(ctx['channel_id'], ctx['id'], res)
+
+
