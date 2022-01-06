@@ -10,11 +10,9 @@ I have no clue where we are taking this thing. It's just there for the sake of b
 
 The obvious out of the way, you will have to `python -m pip install [library name]` for any libraries you may be missing.
 
-Afterwards, open the `config.py` file, and enter your token and ID.
+Afterwards, open the `config.py` file, and enter your token.
 
 To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. Tab over to networking, and keep clicking packets until you find one with the `Authorization` key.
-
-For the ID, simply go into Settings -> Advanced -> Enable developer mode, then right-click yourself and Copy ID.
 
 ## Commands
 `(prefix)command (required) [optional]`

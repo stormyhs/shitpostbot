@@ -13,6 +13,7 @@ cpf = cfg.prefix
 
 bot = discum.Client(
     token=cfg.token, log=False)
+userID = ""
 
 commands.bot = bot
 funcs.bot = bot
@@ -35,6 +36,7 @@ def engine(resp):
         user = bot.gateway.session.user
         print("Logged in as {}#{}".format(
             user['username'], user['discriminator']))
+        userID = user['id']
 
 
 @bot.gateway.command
@@ -44,7 +46,9 @@ def on_message(resp):
 
     ctx = context.ctx(resp.parsed.auto())
 
-    if(ctx.author['id'] != cfg.id):
+    print(bot.gateway.session.user['id'])
+
+    if(ctx.author['id'] != userID):
         if(cfg.logger):
             funcs.logger(ctx)
         funcs.handleReactSpam(ctx)
