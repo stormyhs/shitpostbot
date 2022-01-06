@@ -1,7 +1,8 @@
 import sys
 
-token = ""
-id = ""
+token = "TOKEN"
+id = "USERID"
+prefix = ";"
 
 if(token == ""):
     print("please enter a discord Token ")

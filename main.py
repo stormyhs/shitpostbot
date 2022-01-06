@@ -8,6 +8,7 @@ import json
 import configs as cfg
 
 gifs = {}
+cpf = cfg.prefix
 
 bot = discum.Client(
     token=cfg.token, log=False)
@@ -49,14 +50,14 @@ def on_message(resp):
         return
 
     ctx = resp.parsed.auto()
-    # if(ctx['author']['id'] != cfg.id):
-    # return
+    if(ctx['author']['id'] != cfg.id):
+        return
 
-    if not ctx['content'].startswith(">"):
+    if not ctx['content'].startswith(cpf):
         return
 
     msg = ctx['content'].split(" ")
-    msg[0] = msg[0].replace(">", "")
+    msg[0] = msg[0][1:]
     try:
         amount = int(msg[1])
     except:
@@ -72,15 +73,12 @@ def on_message(resp):
 print(">Loading Gifs...")
 if not (os.path.isfile("giflist.json")):
     print(">Gif list does not exist. Creating...")
-    try:
-        with open("giflist.json", "w") as f:  # TODO: Create using json instead of raw write
-            f.write(
-                "{\n\"nigger\": \"https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif\"\n}")
-    except:
-        print(">Could not create giflist.json")
-        sys.exit(0)
-with open("giflist.json", "r") as gifFile:
-    gifs = json.loads(gifFile.read())
+    with open("giflist.json", "w") as gifFile:
+        gifDictionary =  {"nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
+        json.dumps(gifDictionary, gifFile)
+else:       
+    with open("giflist.json", "r") as gifFile:
+        gifs = json.loads(gifFile.read())
 
 while(True):
     print(">Connecting...")
