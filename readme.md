@@ -18,7 +18,7 @@ For the ID, simply go into Settings -> Advanced -> Enable developer mode, then r
 
 ## Commands
 `(prefix)command (required) [optional]`
-- `spam (key) []` spams key in the `giflist.json` file.
+- `spam (key)` spams key in the `giflist.json` file.
 - `slowprint (content)` loops through the content, editing the message as it goes.
 - `ascii (content)` uses `artii.herokuapp.com` to edit the message into ascii art.
 - `binary (content)` text to binary.
