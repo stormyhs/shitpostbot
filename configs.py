@@ -1,9 +1,10 @@
 import sys
 
-token = 'TOKEN'
-id = "ID"
+token = "Token"
+id = "UserId"
 prefix = ">"
-logger = False
+logger = True
+logFormat = "log" # be sure not to put a dot in here
 
 if(token == ""):
     print("Please enter a discord token")

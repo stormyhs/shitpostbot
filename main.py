@@ -14,7 +14,9 @@ bot = discum.Client(
     token=cfg.token, log=False)
 
 commands.bot = bot
+funcs.bot = bot
 
+commands.loadGifs()
 
 def organicMessage(channel, msg):  # sends a message in a natural looking way
     bot.typingAction(channel)
@@ -36,7 +38,9 @@ def on_message(resp):
     if not resp.event.message:
         return
 
+
     ctx = resp.parsed.auto()
+
     if(ctx['author']['id'] != cfg.id):
         if(cfg.logger):
             funcs.logger(ctx)
@@ -62,7 +66,6 @@ def on_message(resp):
 
     elif msg[0] == "tochar":
         commands.tochar(ctx, msg)
-
 
 while(True):
     print(">Connecting...")
