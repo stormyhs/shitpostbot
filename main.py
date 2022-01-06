@@ -3,7 +3,7 @@ import discum
 import time
 import random
 import sys
-
+import json
 import configs
 
 cfg = configs.config  # fuck you i dont care
@@ -36,10 +36,15 @@ def engine(resp):
                 except:
                     amount = 5
                 for i in range(amount):
-                    bot.sendMessage(
+                    # discreply is what discord sends back after we send the messagee
+                    discreply = bot.sendMessage(
                         m['channel_id'], "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif")
+                    if "retry_after" in discreply.text:
+                        jdata = json.loads(discreply.text)
+                        print(f">{jdata['retry_after']} TIMEOUT")
+                        # wait as long as discord said + 0.5 so we dont get fucked for botting
+                        time.sleep(jdata['retry_after'] + 0.5)
                     time.sleep(0.1)
-                    # TODO: add ratelimit check
 
 
 while(True):
