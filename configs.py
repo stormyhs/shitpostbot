@@ -1,6 +1,6 @@
 import sys
 
-token = ''
+token = ""
 id = ""
 
 if(token == ""):
