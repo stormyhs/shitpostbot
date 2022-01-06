@@ -8,16 +8,30 @@ I have no clue where we are taking this thing. It's just there for the sake of b
 # Usage
 !!! READ THE CODE FOR YOURSELF !!!
 
-!!! DON'T BLINDLY TRUST PEOPLE !!!
-
 The obvious out of the way, you will have to `python -m pip install [library name]` for any libraries you may be missing.
 
-Afterwards, open the `config.py` file, and enter your token and ID.
+Afterwards, open the `config.py` file, and enter your token.
+
 To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. Tab over to networking, and keep clicking packets until you find one with the `Authorization` key.
 
-For the ID, simply go into Settings -> Advanced -> Enable developer mode, then right-click yourself and Copy ID.
+## Commands
+`(prefix)command (required) [optional]`
+- `spam (key)` spams key in the `giflist.json` file.
+- `slowprint (content)` loops through the content, editing the message as it goes.
+- `ascii (content)` uses `artii.herokuapp.com` to edit the message into ascii art.
+- `binary (content)` text to binary.
+- `tochar (content)` binary to text.
+- `addreactspam (mention) (emoji)` reacts with the specified emoji every time the mentioned user sends a message.
+- `rmreactspam (mention)` stops reacting to that user.
+- `clearreactspam` clears the reacts list entirely.
 
-# changelog
+# Changelog
+### v0.7
+- added reactspam feature
+- `ctx` is a class and shit
+- learned how to solve merge conflicts (i think)
+- other stuff idk look at the commits
+
 ### v0.6
 - changed the way messages are sent
 - improved ratelimit checking
