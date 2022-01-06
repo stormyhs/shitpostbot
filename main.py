@@ -19,6 +19,7 @@ funcs.bot = bot
 context.bot = bot
 
 commands.loadGifs()
+commands.loadReactions()
 
 
 def organicMessage(channel, msg):  # sends a message in a natural looking way
@@ -46,6 +47,7 @@ def on_message(resp):
     if(ctx.author['id'] != cfg.id):
         if(cfg.logger):
             funcs.logger(ctx)
+        funcs.handleReactSpam(ctx)
         return
 
     if not ctx.content.startswith(cpf):
@@ -69,6 +71,13 @@ def on_message(resp):
 
     elif msg[0] == "tochar":
         commands.tochar(ctx, msg)
+
+    elif msg[0] == "addreactspam":
+        commands.addreactspam(ctx, msg)
+    elif msg[0] == "removereactspam" or msg[0] == "remreactspam" or msg[0] == "rmreactspam":
+        commands.removereactspam(ctx, msg)
+    elif msg[0] == "clearreactspam":
+        commands.clearreactspam(ctx, msg)
 
 
 while(True):
