@@ -28,7 +28,8 @@ def engine(resp):
 
     if resp.event.message:
         m = resp.parsed.auto()
-        print(m['content'])
+        if(m['author']['id'] == cfg.id):
+            print(m['content'])
 
 
 while(True):
