@@ -44,7 +44,7 @@ def on_message(resp):
 
     ctx = context.ctx(resp.parsed.auto())
 
-    if(ctx.author['id'] != cfg.id):
+    if(ctx.author.id != cfg.id):
         if(cfg.logger):
             funcs.logger(ctx)
         funcs.handleReactSpam(ctx)
@@ -72,11 +72,14 @@ def on_message(resp):
         commands.tochar(ctx)
 
     elif command == "addreactspam":
+        print("sadasd")
         commands.addreactspam(ctx)
+
     elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
         commands.removereactspam(ctx)
+
     elif command == "clearreactspam":
-        commands.clearreactspam(ctx)
+        commands.clearreactspam()
 
 
 while(True):

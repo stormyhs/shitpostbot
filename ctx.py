@@ -51,8 +51,8 @@ class Taskhandler:
             if(len(self.tasks) > 0):
                 task = self.tasks.pop(0)
                 task.execute()
-            else:
-                time.sleep(0.1)
+            
+            time.sleep(0.6)
 
     def addTask(self, task, priority):
         if(priority):
@@ -66,10 +66,19 @@ class Taskhandler:
 
 handler = Taskhandler()
 
+class ctxSubclass:
+    def __init__(self, ctxDict):
+        for key in ctxDict:
+            setattr(self, key, ctxDict[key])
+
 class ctx:
     
     def __init__(self, ctxDict):
         for key in ctxDict:
+            if(key == "author"):
+                setattr(self, key, ctxSubclass(ctxDict[key]))
+                continue
+
             setattr(self, key, ctxDict[key])
 
     def sendMessage(self, content, priority = False):

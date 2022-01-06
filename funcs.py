@@ -14,9 +14,6 @@ def preventRatelimit(discreply):
         print(f">{jdata['retry_after']} TIMEOUT")
         # wait as long as discord said + 0.5 so we dont get fucked for botting
         time.sleep(jdata['retry_after'] + 0.5)
-    else:
-        time.sleep(0.20)
-
 
 def loadEmotes():
     global emoteDictionary
@@ -96,7 +93,20 @@ def logger(ctx):
 
 
 def handleReactSpam(ctx):
+    print(ctx.author.id )
     print(commands.data)
-    if(ctx.author['id'] in commands.data):
-        bot.addReaction(ctx.channel_id, ctx.id,
-                        commands.data[ctx.author['id']])
+    print(commands.data)
+    if(ctx.author.id in commands.data):
+        ctx.addReaction(commands.data[ctx.author.id])
+
+def loadJson(filename):
+    playlist_file = open(filename)
+    playlists = json.load(playlist_file)
+    playlist_file.close()
+    return playlists
+
+def writeJson(file, data, enctype = 'utf-8'):
+    playlist_file = open(file, 'w', encoding=enctype)
+    json.dump(data, playlist_file, indent=4, ensure_ascii=False)
+    playlist_file.close()
+

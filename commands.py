@@ -1,7 +1,6 @@
 import os
 import json
 import requests
-import emoji
 import funcs
 
 gifs = {}
@@ -75,55 +74,40 @@ def tochar(ctx):
     ctx.editMessage(res)
 
 
-def addreactspam(ctx, msg):
+def addreactspam(ctx):
     global data
-    msg.pop(0)  # remove command word
+    content = ctx.content.split(" ")
+    content.pop(0) # remove command word
     id = ""
     theEmoji = ""
-    for word in list(msg):
+    for word in list(content):
         if(word[0:3] == "<@!" and word[len(word)-1] == ">"):
             id = word[3:len(word)-1]
-            msg.remove(word)
+            content.remove(word)
 
     # TODO: unless the retarded user gave more than 3 arguments
-    theEmoji = msg[0]
+    theEmoji = content[0]
 
     newKey = {id: theEmoji}
     if not(os.path.exists("reactspam.json")):
-        with open("reactspam.json", "w", encoding="utf-8") as f:
-            json.dump(newKey, f, indent=4, ensure_ascii=False)
+        funcs.writeJson("reactspam.json", newKey)
     else:
-        with open("reactspam.json", "r+", encoding="utf-8") as f:
-            data = json.loads(f.read())
-            data[id] = theEmoji
-            f.seek(0)
-            f.truncate(0)
-            json.dump(data, f, indent=4, ensure_ascii=False)
+        data = funcs.loadJson("reactspam.json")
+        data[id] = theEmoji
+        funcs.writeJson("reactspam.json", data)
 
 
 def removereactspam(ctx, msg):
     global data
     id = msg[1]
     id = id[3:len(id)-1]
-    try:
-        with open("reactspam.json", "r+", encoding="utf-8") as f:
-            data = json.loads(f.read())
-            if(id in data):
-                del data[id]
-            f.seek(0)
-            f.truncate(0)
-            json.dump(data, f, indent=4, ensure_ascii=False)
-    except Exception as e:
-        return
+    data = funcs.loadJson("reactspam.json")
+    if(id in data):
+        del data[id]
+    funcs.writeJson("reactspam.json", data)
 
 
-def clearreactspam(ctx, msg):
+def clearreactspam():
     global data
     data = {}
-    try:
-        with open("reactspam.json", "r+", encoding="utf-8") as f:
-            f.seek(0)
-            f.truncate(0)
-            f.write("{}")
-    except Exception as e:
-        return
+    funcs.writeJson("reactspam.json", data)
