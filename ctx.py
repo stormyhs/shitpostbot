@@ -79,8 +79,8 @@ class ctx:
     def editMessage(self, content, priority = False):
         handler.addTask(EditMessageTask(self.channel_id, self.id, content), priority)
     
-    def addReaction(self, priority = False):
-        handler.addTask(AddReactionTask(self.channel_id, self.id), priority)
+    def addReaction(self, content, priority = False):
+        handler.addTask(AddReactionTask(self.channel_id, self.id, content), priority)
 
     def deleteMessage(self, priority = False):
         handler.addTask(DeleteMessageTask(self.channel_id, self.id), priority)
