@@ -16,21 +16,30 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 
 ## Commands
 `(prefix)command (required) [optional]`
+### Text fun
 - `spam (key)` spams key in the `giflist.json` file.
 - `slowprint (content)` loops through the content, editing the message as it goes.
 - `ascii (content)` uses `artii.herokuapp.com` to edit the message into ascii art.
 - `binary (content)` text to binary.
 - `tochar (content)` binary to text.
+### Reactions
 - `addreactspam (mention) (emoji)` reacts with the specified emoji every time the mentioned user sends a message.
 - `rmreactspam (mention)` stops reacting to that user.
+- `addkeyspam (keyword) (emoji)` adds reaction to messages that include the keyword
+- `rmkeyspam (keyword)` stops reactong to that keyword
 - `clearreactspam` clears the reacts list entirely.
 
 # Changelog
+
+### v0.9
+- Added reactspam for keywords.
+- Slightly bettter readme
 
 ### v0.8
 - Improved json loading for getreactions
 - Increased the delay between actions 
 - `author` is now a subclass of ctx
+
 ### v0.7
 - added reactspam feature
 - `ctx` is a class and shit

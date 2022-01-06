@@ -78,14 +78,19 @@ def on_message(resp):
     elif command == "addreactspam":
         ctx.deleteMessage()
         commands.addreactspam(ctx)
-
     elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
         ctx.deleteMessage()
         commands.removereactspam(ctx)
-
     elif command == "clearreactspam":
         ctx.deleteMessage()
         commands.clearreactspam()
+
+    elif command == "addkeyspam":
+        ctx.deleteMessage()
+        commands.addkeyspam(ctx)
+    elif command == "removekeyspam" or command == "remkeyspam" or command == "rmkeyspam":
+        ctx.deleteMessage()
+        commands.removekeyspam(ctx)
 
 
 while(True):
