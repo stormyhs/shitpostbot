@@ -11,8 +11,7 @@ class SendMessageTask:
         discreply = bot.sendMessage(self.channel, self.content)
         funcs.preventRatelimit(discreply)
 
-    def __init__(self, guild, channel, content):
-        self.guild = guild
+    def __init__(self, channel, content):
         self.channel = channel
         self.content = content
 
@@ -81,7 +80,7 @@ class ctx:
             setattr(self, key, ctxDict[key])
 
     def sendMessage(self, content, priority = False):
-        handler.addTask(SendMessageTask(self.guild_id, self.channel_id, content), priority)
+        handler.addTask(SendMessageTask(self.channel_id, content), priority)
 
     def editMessage(self, content, priority = False):
         handler.addTask(EditMessageTask(self.channel_id, self.id, content), priority)
