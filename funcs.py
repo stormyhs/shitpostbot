@@ -59,7 +59,6 @@ def getEmojis(bot, ctx):
 
 
 def logger(ctx):
-
     if not (hasattr(ctx, 'guild_id')):
         guildName = "Direct-messages"
         channelName = f"{ctx.author.username}-{ctx.author.id}"
@@ -95,13 +94,13 @@ def logger(ctx):
 
 
 def handleReactSpam(ctx):
-    if(ctx.author.id in commands.data):
-        for emoji in commands.data[ctx.author.id]:
+    if(ctx.author.id in commands.data['userid']):
+        for emoji in commands.data['userid'][ctx.author.id]:
             ctx.addReaction(emoji)
 
     for word in ctx.content.split(" "):
-        if(word in commands.data):
-            for emoji in commands.data[word]:
+        if(word in commands.data['keyword']):
+            for emoji in commands.data['keyword'][word]:
                 ctx.addReaction(emoji)
             break
 
