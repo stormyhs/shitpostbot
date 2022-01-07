@@ -10,6 +10,7 @@ class SendMessageTask:
     def execute(self):
         discreply = bot.sendMessage(self.channel, self.content)
         funcs.preventRatelimit(discreply)
+        time.sleep(0.4)
 
     def __init__(self, channel, content):
         self.channel = channel
@@ -49,9 +50,8 @@ class Taskhandler:
             if(len(self.tasks) > 0):
                 task = self.tasks.pop(0)
                 task.execute()
+            time.sleep(0.4)
             
-            time.sleep(0.6)
-
     def addTask(self, task, priority):
         if(priority):
             self.tasks.insert(0, task)

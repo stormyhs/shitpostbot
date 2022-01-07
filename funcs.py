@@ -12,7 +12,7 @@ def preventRatelimit(discreply):
     if "retry_after" in discreply.text:
         jdata = json.loads(discreply.text)
         print(f">{jdata['retry_after']} TIMEOUT")
-        # wait as long as discord said + 0.5 so we dont get fucked for botting
+        # wait as long as discord said
         time.sleep(jdata['retry_after'])
 
 
@@ -107,14 +107,14 @@ def handleReactSpam(ctx):
             break
 
 
-def loadJson(filename, enctype='utf-8'):
+def loadJson(filename, enctype='utf-16'):
     playlist_file = open(filename, encoding=enctype)
     playlists = json.load(playlist_file)
     playlist_file.close()
     return playlists
 
 
-def writeJson(file, data, enctype='utf-8'):
+def writeJson(file, data, enctype='utf-16'):
     playlist_file = open(file, 'w', encoding=enctype)
     json.dump(data, playlist_file, indent=4, ensure_ascii=False)
     playlist_file.close()

@@ -84,17 +84,16 @@ def addreactspam(ctx):
             content.remove(word)
 
     # TODO: unless the retarded user gave more than 3 arguments
-    theEmoji = content[0]
 
-    newKey = {id: theEmoji}
+    newKey = {id: content}
     if not(os.path.exists("reactspam.json")):
         funcs.writeJson("reactspam.json", newKey)
     else:
         data = funcs.loadJson("reactspam.json")
         if not (id in data):
-            data[id] = [theEmoji]
+            data[id] = content
         else:
-            data[id].append(theEmoji)
+            data[id] += content
         funcs.writeJson("reactspam.json", data)
 
 
