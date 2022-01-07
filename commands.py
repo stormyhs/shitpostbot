@@ -155,7 +155,6 @@ def addSpam(ctx):
         funcs.writeJson("giflist.json", newKey)
     else:
         gifFileContentJson = funcs.loadJson("giflist.json")
-        print(gifFileContentJson)
         gifFileContentJson[keyWord] = gif
         funcs.writeJson("giflist.json", gifFileContentJson)
 
