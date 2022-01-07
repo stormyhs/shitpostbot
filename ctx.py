@@ -73,7 +73,7 @@ class ctx:
     
     def __init__(self, ctxDict):
         for key in ctxDict:
-            if(key == "author"):
+            if(key == "author" or key == "message_reference"):
                 setattr(self, key, ctxSubclass(ctxDict[key]))
                 continue
 
