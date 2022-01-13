@@ -196,7 +196,7 @@ def randreact(ctx):
         try:
             resp = bot.addReaction(
                 ctx.channel_id, messageID, random.choice(decodation))
-            if(resp.status_code == 200):
+            if(resp.status_code == 204):
                 num += 1
             time.sleep(0.2)
         except Exception as ex:
