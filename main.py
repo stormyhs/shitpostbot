@@ -8,6 +8,7 @@ import configs as cfg
 import funcs
 import commands
 import ctx as context
+import statuscycle
 
 cpf = cfg.prefix
 
@@ -18,16 +19,9 @@ userID = ""
 commands.bot = bot
 funcs.bot = bot
 context.bot = bot
+statuscycle.bot = bot
 
-commands.gifs = funcs.loadGifs()
-commands.loadReactions()
-
-
-def organicMessage(channel, msg):  # sends a message in a natural looking way
-    bot.typingAction(channel)
-    for word in msg:
-        time.sleep(round(random.uniform(0, 0.2), 1))
-    bot.sendMessage(channel, msg)
+funcs.loadData()
 
 
 @bot.gateway.command
@@ -69,18 +63,6 @@ def on_message(resp):
         ctx.deleteMessage(priority=True)
         commands.remSpam(ctx)
 
-    elif command == "slowprint":
-        commands.slowPrint(ctx)
-
-    elif command == "ascii":
-        commands.ascii(ctx)
-
-    elif command == "binary":
-        commands.binary(ctx)
-
-    elif command == "tochar":
-        commands.tochar(ctx)
-
     elif command == "addreactspam":
         ctx.deleteMessage(priority=True)
         commands.addreactspam(ctx)
@@ -90,13 +72,31 @@ def on_message(resp):
     elif command == "clearreactspam":
         ctx.deleteMessage(priority=True)
         commands.clearreactspam()
+    elif command == "randreact":
+        ctx.deleteMessage(priority=True)
+        commands.randreact(ctx)
 
-    elif command == "addkeyspam":
-        ctx.deleteMessage(priority=True)
-        commands.addkeyspam(ctx)
-    elif command == "removekeyspam" or command == "remkeyspam" or command == "rmkeyspam":
-        ctx.deleteMessage(priority=True)
-        commands.removekeyspam(ctx)
+    elif command == "slowprint":
+        commands.slowPrint(ctx)
+    elif command == "ascii":
+        commands.ascii(ctx)
+    elif command == "binary":
+        commands.binary(ctx)
+    elif command == "tochar":
+        commands.tochar(ctx)
+
+    elif command == "statuscyclelist":
+        commands.statusCycleList(ctx)
+    elif command == "statuscycleadd":
+        commands.statusCycleAdd(ctx)
+    elif command == "statuscycleremove":
+        commands.statusCycleRemove(ctx)
+    elif command == "statuscycleclear":
+        commands.statusCycleClear(ctx)
+    elif command == "statuscyclestart":
+        commands.statusCycleStart(ctx)
+    elif command == "statuscyclestop":
+        commands.statusCycleStop(ctx)
 
 
 while(True):

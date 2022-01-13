@@ -6,6 +6,7 @@ import commands
 import configs as cfg
 
 bot = None
+data = None
 
 
 def preventRatelimit(discreply):
@@ -21,20 +22,6 @@ def loadEmotes():
     f = open('emojis.json', 'r')
     emoteDictionary = json.load(f)
     f.close()
-
-
-def loadGifs():
-    print(">Loading Gifs...")
-    if not (os.path.isfile("giflist.json")):
-        print(">Gif list does not exist. Creating...")
-        with open("giflist.json", "w") as gifFile:
-            gifs = {
-                "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
-            json.dump(gifs, gifFile)
-    else:
-        with open("giflist.json", "r") as gifFile:
-            gifs = json.loads(gifFile.read())
-    return gifs
 
 
 def getEmojis(bot, ctx):
@@ -67,7 +54,8 @@ def logger(ctx):
 
     else:
         guildName = bot.gateway.session.guild(ctx.guild_id).name
-        channelName = bot.gateway.session.guild(ctx.guild_id).channel(ctx.channel_id)['name']
+        channelName = bot.gateway.session.guild(
+            ctx.guild_id).channel(ctx.channel_id)['name']
         guildPath = f"logger\\{guildName}_{ctx.guild_id}"
         channelPath = guildPath + \
             f"\\{channelName}-{ctx.channel_id}.{cfg.logFormat}"
@@ -106,13 +94,44 @@ def handleReactSpam(ctx):
 
 
 def loadJson(filename, enctype='utf-16'):
-    playlist_file = open(filename, encoding=enctype)
-    playlists = json.load(playlist_file)
-    playlist_file.close()
-    return playlists
+    if not(os.path.exists(filename)):
+        with open(filename, "w") as f:
+            f.write("{}")
+
+    with open(filename, encoding=enctype) as f:
+        content = json.load(f)
+
+    return content
 
 
 def writeJson(file, data, enctype='utf-16'):
     playlist_file = open(file, 'w', encoding=enctype)
     json.dump(data, playlist_file, indent=4, ensure_ascii=False)
     playlist_file.close()
+
+
+def loadData():
+    print(">Loading Gifs...")
+    if not (os.path.isfile("giflist.json")):
+        print(">Gif list does not exist. Creating...")
+        with open("giflist.json", "w") as gifFile:
+            gifs = {
+                "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
+            json.dump(gifs, gifFile)
+    else:
+        with open("giflist.json", "r") as gifFile:
+            gifs = json.loads(gifFile.read())
+    commands.gifs = gifs
+
+    global data
+    print(">Loading Reacts...")
+    if not (os.path.isfile("reactspam.json")):
+        print(">Reacts list does not exist. Creating...")
+        writeJson("reactspam.json", data)
+    else:
+        data = loadJson("reactspam.json")
+
+    print(">Loading Statuses...")
+    if not(os.path.exists("statuscycle.json")):
+        print(">Statuses list does not exist. Creating...")
+        writeJson("statuscycle.json", {})
