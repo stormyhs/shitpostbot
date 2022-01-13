@@ -87,16 +87,22 @@ def on_message(resp):
 
     elif command == "statuscyclelist":
         commands.statusCycleList(ctx)
+        ctx.deleteMessage(priority=True)
     elif command == "statuscycleadd":
         commands.statusCycleAdd(ctx)
+        ctx.deleteMessage(priority=True)
     elif command == "statuscycleremove":
         commands.statusCycleRemove(ctx)
+        ctx.deleteMessage(priority=True)
     elif command == "statuscycleclear":
         commands.statusCycleClear(ctx)
+        ctx.deleteMessage(priority=True)
     elif command == "statuscyclestart":
         commands.statusCycleStart(ctx)
+        ctx.deleteMessage(priority=True)
     elif command == "statuscyclestop":
         commands.statusCycleStop(ctx)
+        ctx.deleteMessage(priority=True)
 
 
 while(True):
