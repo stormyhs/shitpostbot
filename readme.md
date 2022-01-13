@@ -22,17 +22,32 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 - `binary (content)` text to binary.
 - `tochar (content)` binary to text.
 ### Reactions
+#### Auto reacts
 - `addreactspam (mention) (emoji)` reacts with the specified emoji every time the mentioned user sends a message.
 - `rmreactspam (mention)` stops reacting to that user.
 - `addkeyspam (keyword) (emoji)` adds reaction to messages that include the keyword
 - `rmkeyspam (keyword)` stops reactong to that keyword
 - `clearreactspam` clears the reacts list entirely.
+#### Other reacts
+- `randreact (message id)` adds 10 fully random reactions to the message.
 ### Gif spam
 - `spam (key)` spams key in the `giflist.json` file.
 - `addspam (key) (link)` adds new entry for you to spam all day
 - `rmspam` removes the entry from `giflist.json`
+### Status Cycling
+#### The default loop timer is 5 minutes. Feel free to change it in `configs.py`.
+- `statuscyclelist` shows a list of your statuses.
+- `statuscycleadd (emoji) (text)` adds a status to the cycle
+- `statuscycleremove (id)` removes a status from the cycle
+- `statuscycleclear` clears the status cycle
+- `statuscyclestart` starts the loop
+- `statuscyclestop` stops the loop
 
 # Changelog
+### v0.11
+- Added `randreact` command.
+- Added `statuscycle` command list.
+- Cleaned up a little.
 
 ### v0.10
 - Added giflist editing commands.
