@@ -82,13 +82,15 @@ def logger(ctx):
 
 
 def handleReactSpam(ctx):
-    if(ctx.author.id in commands.data['userid']):
-        for emoji in commands.data['userid'][ctx.author.id]:
+    reactSpamData = loadJson("reactspam.json")
+    if(ctx.author.id in reactSpamData):
+        for emoji in reactSpamData[ctx.author.id]:
             ctx.addReaction(emoji)
 
+    wordReactSpamData = loadJson("wordreactspam.json")
     for word in ctx.content.split(" "):
-        if(word in commands.data['keyword']):
-            for emoji in commands.data['keyword'][word]:
+        if(word in wordReactSpamData):
+            for emoji in wordReactSpamData[word]:
                 ctx.addReaction(emoji)
             break
 
@@ -111,27 +113,24 @@ def writeJson(file, data, enctype='utf-16'):
 
 
 def loadData():
-    print(">Loading Gifs...")
+    print(">LOADING DATA:")
+    print(">Loading Gifs...", end="\r")
     if not (os.path.isfile("giflist.json")):
-        print(">Gif list does not exist. Creating...")
-        with open("giflist.json", "w") as gifFile:
-            gifs = {
-                "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"}
-            json.dump(gifs, gifFile)
-    else:
-        with open("giflist.json", "r") as gifFile:
-            gifs = json.loads(gifFile.read())
-    commands.gifs = gifs
+        writeJson("giflist.json", {
+                  "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"})
+    print(">Loading Gifs... [OK]")
 
-    global data
-    print(">Loading Reacts...")
+    print(">Loading Reacts...", end="\r")
     if not (os.path.isfile("reactspam.json")):
-        print(">Reacts list does not exist. Creating...")
-        writeJson("reactspam.json", data)
-    else:
-        data = loadJson("reactspam.json")
+        writeJson("reactspam.json", {})
+    print(">Loading Reacts... [OK]")
 
-    print(">Loading Statuses...")
+    print(">Loading Keyword Reacts...", end="\r")
+    if not (os.path.isfile("wordreactspam.json")):
+        writeJson("wordreactspam.json", {})
+    print(">Loading Keyword Reacts... [OK]")
+
+    print(">Loading Statuses...", end="\r")
     if not(os.path.exists("statuscycle.json")):
-        print(">Statuses list does not exist. Creating...")
         writeJson("statuscycle.json", {})
+    print(">Loading Statuses... [OK]")

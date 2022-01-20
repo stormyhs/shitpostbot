@@ -63,18 +63,28 @@ def on_message(resp):
         ctx.deleteMessage(priority=True)
         commands.remSpam(ctx)
 
-    elif command == "addreactspam":
+    elif command == "adduserreact":
         ctx.deleteMessage(priority=True)
         commands.addreactspam(ctx)
-    elif command == "removereactspam" or command == "remreactspam" or command == "rmreactspam":
+    elif command == "removeuserreact" or command == "remuserreact" or command == "rmuserreact":
         ctx.deleteMessage(priority=True)
         commands.removereactspam(ctx)
-    elif command == "clearreactspam":
+    elif command == "clearuserreact":
         ctx.deleteMessage(priority=True)
         commands.clearreactspam()
     elif command == "randreact":
         ctx.deleteMessage(priority=True)
         commands.randreact(ctx)
+
+    elif command == "addwordspam":
+        ctx.deleteMessage(priority=True)
+        commands.addkeyspam(ctx)
+    elif command == "removewordspam" or command == "remwordspam" or command == "rmwordspam":
+        ctx.deleteMessage(priority=True)
+        commands.removekeyspam(ctx)
+    elif command == "clearwordspam":
+        ctx.deleteMessage(priority=True)
+        commands.clearreactspam(ctx)
 
     elif command == "slowprint":
         commands.slowPrint(ctx)

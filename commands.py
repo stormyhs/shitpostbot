@@ -70,7 +70,7 @@ def tochar(ctx):
 
 
 def addreactspam(ctx):
-    global data
+    reactSpamData = funcs.loadJson("reactspam.json")
     content = ctx.content.split(" ")
     del content[0:2]  # remove command word and mention
 
@@ -83,89 +83,83 @@ def addreactspam(ctx):
         funcs.writeJson("reactspam.json", newKey)
     else:
         data = funcs.loadJson("reactspam.json")
-        if not (userId in data['userid']):
-            data['userid'][userId] = content
+        if not (userId in reactSpamData):
+            data[userId] = content
         else:
-            data['userid'][userId] += content
+            data[userId] += content
         funcs.writeJson("reactspam.json", data)
 
 
 def removereactspam(ctx):
-    global data
+    reactSpamData = funcs.loadJson("reactspam.json")
+
     if not (len(ctx.mentions) > 0):
         return
+
     userId = ctx.mentions[0]['id']
 
-    data = funcs.loadJson("reactspam.json")
-    if(userId in data):
-        del data['userid'][userId]
-    funcs.writeJson("reactspam.json", data)
+    if(userId in reactSpamData):
+        del reactSpamData[userId]
+
+    funcs.writeJson("reactspam.json", reactSpamData)
 
 
 def clearreactspam():
-    global data
-    data = {'userid': {}, 'keyword': {}}
-    funcs.writeJson("reactspam.json", data)
+    funcs.writeJson("reactspam.json", {})
 
 
 def addkeyspam(ctx):
-    global data
+    wordReactSpamData = funcs.loadJson("wordreactspam.json")
     content = ctx.content.split(" ")
     content.pop(0)  # remove command word
     keyWord = content[0]
     theEmoji = content[1]
 
-    newKey = {keyWord: theEmoji}
-    if not(os.path.exists("reactspam.json")):
-        funcs.writeJson("reactspam.json", newKey)
+    if not (keyWord in wordReactSpamData):
+        wordReactSpamData[keyWord] = [theEmoji]
     else:
-        data = funcs.loadJson("reactspam.json")
-        if not (keyWord in data):
-            data['keyword'][keyWord] = [theEmoji]
-        else:
-            data['keyword'][keyWord].append(theEmoji)
-        funcs.writeJson("reactspam.json", data)
+        wordReactSpamData[keyWord].append(theEmoji)
+
+    funcs.writeJson("wordreactspam.json", wordReactSpamData)
 
 
 def removekeyspam(ctx):
+    wordReactSpamData = funcs.loadJson("wordreactspam.json")
     msg = ctx.content.split(" ")
-    global data
     keyWord = msg[1]
-    data = funcs.loadJson("reactspam.json")
-    if(keyWord in data['keyword']):
-        del data['keyword'][keyWord]
-    funcs.writeJson("reactspam.json", data)
+
+    if(keyWord in wordReactSpamData):
+        del wordReactSpamData[keyWord]
+
+    funcs.writeJson("wordreactspam.json", {})
+
+
+def clearreactspam(ctx):
+    funcs.writeJson("wordreactspam.json", {})
 
 
 def addSpam(ctx):
-    global gifs
+    gifsData = funcs.loadJson("giflist.json")
     content = ctx.content.split(" ")
     content.pop(0)
     keyWord = content[0]
     gif = content[1]
-    newKey = {keyWord: gif}
-    if not(os.path.exists("giflist.json")):
-        funcs.writeJson("giflist.json", newKey)
-    else:
-        gifFileContentJson = funcs.loadJson("giflist.json")
-        gifFileContentJson[keyWord] = gif
-        funcs.writeJson("giflist.json", gifFileContentJson)
 
-    gifs = funcs.loadJson("giflist.json")
+    gifsData = funcs.loadJson("giflist.json")
+    gifsData[keyWord] = gif
+    funcs.writeJson("giflist.json", gifsData)
 
 
 def remSpam(ctx):
-    global gifs
+    gifsData = funcs.loadJson("giflist.json")
     content = ctx.content.split(" ")
     content.pop(0)
     keyWord = content[0]
-    gifFileContentJson = funcs.loadJson("giflist.json")
 
-    if(keyWord in gifFileContentJson):
-        del gifFileContentJson[keyWord]
-    funcs.writeJson("giflist.json", gifFileContentJson)
+    if(keyWord in gifsData):
+        del gifsData[keyWord]
 
-    gifs = funcs.loadJson("giflist.json")
+    funcs.writeJson("giflist.json", gifsData)
 
 
 def antivirus(ctx):

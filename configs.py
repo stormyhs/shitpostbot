@@ -1,7 +1,7 @@
 import sys
 
 # Core
-token = "TOKEN"
+token = ""
 if(token == ""):
     print("Please enter a discord token in the configs.py file.")
     sys.exit(0)
