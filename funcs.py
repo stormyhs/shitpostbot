@@ -56,9 +56,9 @@ def logger(ctx):
         guildName = bot.gateway.session.guild(ctx.guild_id).name
         channelName = bot.gateway.session.guild(
             ctx.guild_id).channel(ctx.channel_id)['name']
-        guildPath = f"logger\\{guildName}_{ctx.guild_id}"
+        guildPath = f"logger\\{ctx.guild_id}"
         channelPath = guildPath + \
-            f"\\{channelName}-{ctx.channel_id}.{cfg.logFormat}"
+            f"\\{ctx.channel_id}.{cfg.logFormat}"
 
     if not(os.path.exists("logger")):
         os.makedirs("logger")
