@@ -134,7 +134,7 @@ def removekeyspam(ctx):
     funcs.writeJson("wordreactspam.json", {})
 
 
-def clearreactspam(ctx):
+def clearkeyspam(ctx):
     funcs.writeJson("wordreactspam.json", {})
 
 

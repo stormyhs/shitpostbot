@@ -84,7 +84,7 @@ def on_message(resp):
         commands.removekeyspam(ctx)
     elif command == "clearwordspam":
         ctx.deleteMessage(priority=True)
-        commands.clearreactspam(ctx)
+        commands.clearkeyspam(ctx)
 
     elif command == "slowprint":
         commands.slowPrint(ctx)
