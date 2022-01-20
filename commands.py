@@ -104,7 +104,7 @@ def removereactspam(ctx):
     funcs.writeJson("reactspam.json", reactSpamData)
 
 
-def clearreactspam():
+def clearreactspam(ctx):
     funcs.writeJson("reactspam.json", {})
 
 
