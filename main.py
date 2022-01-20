@@ -71,7 +71,7 @@ def on_message(resp):
         commands.removereactspam(ctx)
     elif command == "clearuserreact":
         ctx.deleteMessage(priority=True)
-        commands.clearreactspam()
+        commands.clearreactspam(ctx)
     elif command == "randreact":
         ctx.deleteMessage(priority=True)
         commands.randreact(ctx)
