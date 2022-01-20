@@ -48,6 +48,9 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 - `statuscyclestop` stops the loop
 
 # Changelog
+### v0.12.1
+- Patched possibly bad vulnerability in the logger allowing escape from `logger` dir. Thanks, TrollerOfHolland.
+
 ### v0.12
 - Renamed commands to be slightly more readable
 - Keyword reaction commands actually work now
