@@ -9,23 +9,23 @@ import threading
 import ctx as context
 import statuscycle
 
-gifs = {}
 bot = None
 data = {'userid': {}, 'keyword': {}}
 statusCycleThread = threading.Thread(target=statuscycle.cycle)
 
 
 def messageSpam(ctx):
+    gifsData = funcs.loadJson("giflist.json")
     content = ctx.content[5:]
     content = content.split(" ")
     try:
         amount = int(content[1])
     except:
         amount = 5
-    if not content[0] in gifs:
+    if not content[0] in gifsData:
         content = content[0]
     else:
-        content = gifs[content[0]]
+        content = gifsData[content[0]]
 
     for i in range(amount):
         ctx.sendMessage(content)
