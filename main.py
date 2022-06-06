@@ -4,16 +4,16 @@ import time
 import random
 import sys
 
-import configs as cfg
+import configs
 import funcs
 import commands
 import ctx as context
 import statuscycle
 
-cpf = cfg.prefix
+cpf = configs.prefix
 
 bot = discum.Client(
-    token=cfg.token, log=False)
+    token=configs.token, log=False)
 userID = ""
 
 commands.bot = bot
@@ -33,7 +33,6 @@ def engine(resp):
             user['username'], user['discriminator']))
         userID = user['id']
 
-
 @bot.gateway.command
 def on_message(resp):
     if not resp.event.message:
@@ -42,7 +41,7 @@ def on_message(resp):
     ctx = context.ctx(resp.parsed.auto())
 
     if(ctx.author.id != userID):
-        if(cfg.logger):
+        if(configs.logger):
             funcs.logger(ctx)
         funcs.handleReactSpam(ctx)
         return

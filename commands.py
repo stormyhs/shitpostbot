@@ -1,12 +1,10 @@
 import os
-import json
-import requests
+import pyfiglet
 import funcs
 import time
 import emoji
 import random
 import threading
-import ctx as context
 import statuscycle
 
 bot = None
@@ -30,7 +28,6 @@ def messageSpam(ctx):
     for i in range(amount):
         ctx.sendMessage(content)
 
-
 def slowPrint(ctx):
     originalMessage = ctx.content[10:]
     print(originalMessage)
@@ -39,14 +36,10 @@ def slowPrint(ctx):
         currentMessage += i
         ctx.editMessage(currentMessage)
 
-
 def ascii(ctx):
     originalMessage = ctx.content[6:]
-    originalMessage = originalMessage.replace(" ", "+")
-    request = requests.get(
-        "https://artii.herokuapp.com/make?text=" + originalMessage.upper())
-    ctx.editMessage(f"```{request.text}```")
-
+    art = pyfiglet.figlet_format(originalMessage)
+    ctx.editMessage(f"```\n{art}\n```")
 
 def binary(ctx):
     content = ctx.content.split(" ")
@@ -59,7 +52,6 @@ def binary(ctx):
         res += "\n"
     ctx.editMessage(res)
 
-
 def tochar(ctx):
     content = ctx.content.split(" ")
     content.pop(0)
@@ -67,7 +59,6 @@ def tochar(ctx):
     for word in content:
         res += chr(int(word, 2))
     ctx.editMessage(res)
-
 
 def addreactspam(ctx):
     reactSpamData = funcs.loadJson("reactspam.json")
@@ -89,7 +80,6 @@ def addreactspam(ctx):
             data[userId] += content
         funcs.writeJson("reactspam.json", data)
 
-
 def removereactspam(ctx):
     reactSpamData = funcs.loadJson("reactspam.json")
 
@@ -103,10 +93,8 @@ def removereactspam(ctx):
 
     funcs.writeJson("reactspam.json", reactSpamData)
 
-
 def clearreactspam(ctx):
     funcs.writeJson("reactspam.json", {})
-
 
 def addkeyspam(ctx):
     wordReactSpamData = funcs.loadJson("wordreactspam.json")
@@ -122,7 +110,6 @@ def addkeyspam(ctx):
 
     funcs.writeJson("wordreactspam.json", wordReactSpamData)
 
-
 def removekeyspam(ctx):
     wordReactSpamData = funcs.loadJson("wordreactspam.json")
     msg = ctx.content.split(" ")
@@ -133,10 +120,8 @@ def removekeyspam(ctx):
 
     funcs.writeJson("wordreactspam.json", {})
 
-
 def clearkeyspam(ctx):
     funcs.writeJson("wordreactspam.json", {})
-
 
 def addSpam(ctx):
     gifsData = funcs.loadJson("giflist.json")
@@ -149,7 +134,6 @@ def addSpam(ctx):
     gifsData[keyWord] = gif
     funcs.writeJson("giflist.json", gifsData)
 
-
 def remSpam(ctx):
     gifsData = funcs.loadJson("giflist.json")
     content = ctx.content.split(" ")
@@ -160,14 +144,6 @@ def remSpam(ctx):
         del gifsData[keyWord]
 
     funcs.writeJson("giflist.json", gifsData)
-
-
-def antivirus(ctx):
-    ctx.editMessage(
-        "https://cdn.discordapp.com/attachments/862772809242509322/928032486880063499/796078795185717268-1.png")
-    time.sleep(0.24)
-    ctx.deleteMessage(priority=True)
-
 
 def randreact(ctx):
     msg = ctx.content.split(" ")
@@ -196,7 +172,6 @@ def randreact(ctx):
         except Exception as ex:
             print(ex)
 
-
 def statusCycleAdd(ctx):
     content = ctx.content.split(" ")
     content.pop(0)  # remove command word
@@ -215,7 +190,6 @@ def statusCycleAdd(ctx):
             data[text] = theEmoji
         funcs.writeJson("statuscycle.json", data)
 
-
 def statusCycleRemove(ctx):
     content = ctx.content.split(" ")
     num = int(content[1])
@@ -231,10 +205,8 @@ def statusCycleRemove(ctx):
 
     funcs.writeJson("statuscycle.json", statuses)
 
-
 def statusCycleClear(ctx):
     funcs.writeJson("statuscycle.json", {})
-
 
 def statusCycleList(ctx):
     if not(os.path.exists("statuscycle.json")):
@@ -250,10 +222,8 @@ def statusCycleList(ctx):
 
     bot.sendMessage(ctx.channel_id, text)
 
-
 def statusCycleStart(ctx):
     statusCycleThread.start()
-
 
 def statusCycleStop(ctx):
     statuscycle.running = False
