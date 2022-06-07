@@ -103,8 +103,7 @@ def loadData():
     print(">LOADING DATA:")
     print(">Loading Gifs...", end="\r")
     if not (os.path.isfile("giflist.json")):
-        writeJson("giflist.json", {
-                  "nigger": "https://media.discordapp.net/attachments/911923982821904427/924651985024720956/image0-16-1.gif"})
+        writeJson("giflist.json", "{}")
     print(">Loading Gifs... [OK]")
 
     print(">Loading Reacts...", end="\r")
