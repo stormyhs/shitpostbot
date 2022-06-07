@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-import discum
-import time
-import random
-import sys
+import discum, time, random, sys
 
 import configs
 import funcs
@@ -10,19 +7,14 @@ import commands
 import ctx as context
 import statuscycle
 
-cpf = configs.prefix
-
-bot = discum.Client(
-    token=configs.token, log=False)
+bot = discum.Client(token=configs.token, log=False)
 userID = ""
 
-commands.bot = bot
-funcs.bot = bot
+#TODO: ?
 context.bot = bot
 statuscycle.bot = bot
 
 funcs.loadData()
-
 
 @bot.gateway.command
 def engine(resp):
@@ -42,14 +34,14 @@ def on_message(resp):
 
     if(ctx.author.id != userID):
         if(configs.logger):
-            funcs.logger(ctx)
+            funcs.logger(ctx, bot)
         funcs.handleReactSpam(ctx)
         return
 
-    if not ctx.content.startswith(cpf):
+    if not ctx.content.startswith(configs.prefix):
         return
 
-    ctx.content = ctx.content[len(cpf):]
+    ctx.content = ctx.content[len(configs.prefix):]
     command = ctx.content.split(" ")[0]
 
     if command == "spam":
@@ -73,7 +65,7 @@ def on_message(resp):
         commands.clearreactspam(ctx)
     elif command == "randreact":
         ctx.deleteMessage(priority=True)
-        commands.randreact(ctx)
+        commands.randreact(ctx, bot)
 
     elif command == "addwordspam":
         ctx.deleteMessage(priority=True)
@@ -95,7 +87,7 @@ def on_message(resp):
         commands.tochar(ctx)
 
     elif command == "statuscyclelist":
-        commands.statusCycleList(ctx)
+        commands.statusCycleList(ctx, bot)
         ctx.deleteMessage(priority=True)
     elif command == "statuscycleadd":
         commands.statusCycleAdd(ctx)

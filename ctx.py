@@ -1,6 +1,4 @@
 import threading, time
-
-
 import funcs
 
 bot = None
@@ -40,10 +38,7 @@ class DeleteMessageTask:
         self.channel = channel
         self.messageId = messageId
 
-
-
-class Taskhandler:    
-
+class Taskhandler:
     tasks = [] 
     def handler(self):
         while True:
@@ -70,7 +65,6 @@ class ctxSubclass:
             setattr(self, key, ctxDict[key])
 
 class ctx:
-    
     def __init__(self, ctxDict):
         for key in ctxDict:
             if(key == "author" or key == "message_reference"):

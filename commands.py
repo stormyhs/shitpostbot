@@ -1,16 +1,7 @@
-import os
-import pyfiglet
-import funcs
-import time
-import emoji
-import random
-import threading
-import statuscycle
+import os, pyfiglet, funcs, time, emoji, random, threading, statuscycle
 
-bot = None
 data = {'userid': {}, 'keyword': {}}
 statusCycleThread = threading.Thread(target=statuscycle.cycle)
-
 
 def messageSpam(ctx):
     gifsData = funcs.loadJson("giflist.json")
@@ -145,7 +136,7 @@ def remSpam(ctx):
 
     funcs.writeJson("giflist.json", gifsData)
 
-def randreact(ctx):
+def randreact(ctx, bot):
     msg = ctx.content.split(" ")
 
     messageID = msg[1]
@@ -208,7 +199,7 @@ def statusCycleRemove(ctx):
 def statusCycleClear(ctx):
     funcs.writeJson("statuscycle.json", {})
 
-def statusCycleList(ctx):
+def statusCycleList(ctx, bot):
     if not(os.path.exists("statuscycle.json")):
         return
 

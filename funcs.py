@@ -1,13 +1,7 @@
-import os
-import json
-import time
-import commands
+import os, json, time
+import configs
 
-import configs as cfg
-
-bot = None
 data = None
-
 
 def preventRatelimit(discreply):
     if "retry_after" in discreply.text:
@@ -16,13 +10,11 @@ def preventRatelimit(discreply):
         # wait as long as discord said
         time.sleep(jdata['retry_after'])
 
-
 def loadEmotes():
     global emoteDictionary
     f = open('emojis.json', 'r')
     emoteDictionary = json.load(f)
     f.close()
-
 
 def getEmojis(bot, ctx):
     emojiList = {}
@@ -44,13 +36,12 @@ def getEmojis(bot, ctx):
     f.close()
     loadEmotes()
 
-
-def logger(ctx):
+def logger(ctx, bot):
     if not (hasattr(ctx, 'guild_id')):
         guildName = "Direct-messages"
         channelName = f"{ctx.author.username}-{ctx.author.id}"
         guildPath = f"logger\\{guildName}"
-        channelPath = guildPath + f"\\{channelName}.{cfg.logFormat}"
+        channelPath = guildPath + f"\\{channelName}.{configs.logFormat}"
 
     else:
         guildName = bot.gateway.session.guild(ctx.guild_id).name
@@ -58,7 +49,7 @@ def logger(ctx):
             ctx.guild_id).channel(ctx.channel_id)['name']
         guildPath = f"logger\\{ctx.guild_id}"
         channelPath = guildPath + \
-            f"\\{ctx.channel_id}.{cfg.logFormat}"
+            f"\\{ctx.channel_id}.{configs.logFormat}"
 
     if not(os.path.exists("logger")):
         os.makedirs("logger")
@@ -80,7 +71,6 @@ def logger(ctx):
         f.write(
             f"{ctx.author.username}#{ctx.author.discriminator} AT {timestamp} --- Message ID {ctx.id}\n{ctx.content}\n\n")
 
-
 def handleReactSpam(ctx):
     reactSpamData = loadJson("reactspam.json")
     if(ctx.author.id in reactSpamData):
@@ -94,7 +84,6 @@ def handleReactSpam(ctx):
                 ctx.addReaction(emoji)
             break
 
-
 def loadJson(filename, enctype='utf-16'):
     if not(os.path.exists(filename)):
         with open(filename, "w") as f:
@@ -105,12 +94,10 @@ def loadJson(filename, enctype='utf-16'):
 
     return content
 
-
 def writeJson(file, data, enctype='utf-16'):
     playlist_file = open(file, 'w', encoding=enctype)
     json.dump(data, playlist_file, indent=4, ensure_ascii=False)
     playlist_file.close()
-
 
 def loadData():
     print(">LOADING DATA:")
