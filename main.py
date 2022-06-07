@@ -8,7 +8,6 @@ import ctx as context
 import statuscycle
 
 bot = discum.Client(token=configs.token, log=False)
-userID = ""
 
 #TODO: ?
 context.bot = bot
@@ -18,12 +17,11 @@ funcs.loadData()
 
 @bot.gateway.command
 def engine(resp):
-    global userID
     if resp.event.ready_supplemental:  # ready_supplemental is sent after ready
         user = bot.gateway.session.user
         print("Logged in as {}#{}".format(
             user['username'], user['discriminator']))
-        userID = user['id']
+        configs.user_id = user['id']
 
 @bot.gateway.command
 def on_message(resp):
@@ -32,7 +30,7 @@ def on_message(resp):
 
     ctx = context.ctx(resp.parsed.auto())
 
-    if(ctx.author.id != userID):
+    if(ctx.author.id != configs.user_id):
         if(configs.logger):
             funcs.logger(ctx, bot)
         funcs.handleReactSpam(ctx)

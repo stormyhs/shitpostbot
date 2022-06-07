@@ -15,3 +15,6 @@ logFormat = "log"  # be sure not to put a dot in here
 
 # Misc
 statusCycleTimer = 300  # Measured in seconds. Do not make this too fast.
+
+# Automatic
+user_id = ""
