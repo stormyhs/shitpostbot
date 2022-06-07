@@ -1,14 +1,12 @@
 # Shitpost Selfbot
-
-
-A discord self-bot to automate shitposting for your everyday needs. Caution: May be a little racist.
-
-I have no clue where we are taking this thing. It's just there for the sake of being there.
+A discord self-bot to automate shitposting.
 
 # Usage
 !!! READ THE CODE FOR YOURSELF !!!
 
-The obvious out of the way, you will have to `python -m pip install [library name]` for any libraries you may be missing.
+!!! SELF-BOTS ARE AGAINST TOS  !!!
+
+The obvious out of the way, you will have to `python -m pip install [library name]` for any libraries you may be missing. I'll make a requirements file when I care.
 
 Afterwards, open the `config.py` file, and enter your token.
 
@@ -46,61 +44,3 @@ To get your token, simply press F12 on the browser, or CTRL+SHIFT+I on the app. 
 - `statuscycleclear` clears the status cycle
 - `statuscyclestart` starts the loop
 - `statuscyclestop` stops the loop
-
-# Changelog
-### v0.12.1
-- Patched possibly bad vulnerability in the logger allowing escape from `logger` dir. Thanks, TrollerOfHolland.
-
-### v0.12
-- Renamed commands to be slightly more readable
-- Keyword reaction commands actually work now
-- `data` global var no longer used (i think)
-- Fixed someone's shit that broke my shit
-
-### v0.11
-- Added `randreact` command.
-- Added `statuscycle` command list.
-- Cleaned up a little.
-
-### v0.10
-- Added giflist editing commands.
-
-### v0.9
-- Added reactspam for keywords.
-- Slightly bettter readme
-
-### v0.8
-- Improved json loading for getreactions
-- Increased the delay between actions 
-- `author` is now a subclass of ctx
-
-### v0.7
-- added reactspam feature
-- `ctx` is a class and shit
-- learned how to solve merge conflicts (i think)
-- other stuff idk look at the commits
-
-### v0.6
-- changed the way messages are sent
-- improved ratelimit checking
-- ctx is now a class
-
-### v0.5
-- added nefarious logger :troll:
-- added binary to text command
-
-### v0.4
-- added ascii command
-- added slowprint command
-- added text to binary command
-
-### v0.3
-- Parses the command properly
-- (re)Added delay between messages
-- Checks for giflist file
-
-### v0.2
-- very basic prototype
-
-### v0.1
-- initial
